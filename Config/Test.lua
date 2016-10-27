@@ -24,9 +24,9 @@ for i = 0,10000000 do
 	elseif method == 4 then
 		rt = data.iSet4
 	elseif method == 5 then
-		rt = data.iSet5
+		rt = data.test.iSet5
 	elseif method == 6 then
-		rt = data.iSet6
+		rt = data.test.iSet6
 	elseif method == 7 then
 		rt = data.iSet7
 	elseif method == 8 then

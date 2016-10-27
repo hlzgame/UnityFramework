@@ -5,6 +5,7 @@ local type = type
 local tostring = tostring
 local pairs = pairs
 local ipairs = ipairs
+local rawget = rawget
 
 function TableLoader()
     for k, v in pairs(Table) do

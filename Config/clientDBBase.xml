@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root inputbase="./策划表" outputbase="./" mergeout="clientDBBase.lua" savesingle="0" language="lua">
+
+	<table name="Lottery" xls="c抽奖表.xls" sheet="抽奖表">
+		<field name="iLotteryId" col="抽奖ID" type="int32" key="1" />
+		<field name="iSeqId" col="序列ID" type="int32" key="1" />
+		<field name="iSet1" col="奖池1" type="int32" />
+		<field name="iSet2" col="奖池2" type="int32" />
+		<field name="iSet3" col="奖池3" type="int32" />
+		<field name="iSet4" col="奖池4" type="int32" />
+			<field name="iSet5" col="奖池5" type="int32" />
+				<field name="iSet6" col="奖池6" type="int32" />
+		<field name="iSet7" col="奖池7" type="int32" />
+		<field name="iSet8" col="奖池8" type="int32" />
+			<field name="iSet9" col="奖池9" type = "int32" />
+			<field name="iSet10" col="奖池10" type = "int32" />
+			<field name="iSet11" col="奖池11" type = "int32" />
+
+		<field name="iSet12" col="奖池12" type="int32" />
+		<field name="iSet13" col="特殊奖池" type="int32" />
+	</table>
+
+</root>

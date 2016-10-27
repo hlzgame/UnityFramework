@@ -14,9 +14,9 @@
 		</dict>
 		<field name="iSet7" col="奖池7" type="int32" />
 		<field name="iSet8" col="奖池8" type="int32" />
-			<field name="iSet9" col="奖池9" type = "array" subtype = "int32"/>
-			<field name="iSet10" col="奖池10" type = "int32" />
-			<field name="iSet11" col="奖池11" type = "int32" />
+		<field name="iSet9" col="奖池9" type = "array" subtype = "int32"/>
+		<field name="iSet10" col="奖池10" type = "int32" />
+		<field name="iSet11" col="奖池11" type = "int32" />
 
 		<field name="iSet12" col="奖池12" type="int32" />
 		<field name="iSet13" col="特殊奖池" type="int32" />

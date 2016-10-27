@@ -5,35 +5,41 @@ local type = type
 local tostring = tostring
 local pairs = pairs
 local ipairs = ipairs
-local __m = {}
-
-__m.__index = function (self, field)
-	local index = self.__meta[field]
-	if index == nil then
-		return nil
-	end
-	
-	if self[index] == nil then
-		return nil;
-	end
-
-	self[field] = self[index]
-	local fieldData = self[field]
-	
-	local __dict = self.__meta.__dict
-	if __dict then
-		if __dict[index] then
-			fieldData.__meta = __dict[index]
-			setmetatable(fieldData,__m)
-		end
-	end
-
-	return fieldData
-end
 
 function TableLoader()
     for k, v in pairs(Table) do
         if type(v) == "table" and v.__meta ~= nil then
+			local __m = {}
+			__m.__index = function (self, field)
+				local __meta
+				if rawget(self,__meta)== nil then
+					__meta = v.__meta
+				else
+					__meta =self.__meta
+				end
+				local index = __meta[field]
+				if index == nil then
+					return nil
+				end
+				
+				if self[index] == nil then
+					return nil;
+				end
+
+				self[field] = self[index]
+				local fieldData = self[field]
+				
+				local __dict = __meta.__dict
+				if __dict then
+					if __dict[index] then
+						fieldData.__meta = __dict[index]
+						setmetatable(fieldData,__m)
+					end
+				end
+
+				return fieldData
+			end
+
             v.get = function(...)
                 local arg = {...}
                 if #arg == 0 then
@@ -62,8 +68,7 @@ function TableLoader()
 
                 local row = v[key]
                 if row ~= nil then
-                    if row.__meta == nil then
-						row.__meta = v.__meta
+                    if getmetatable(row) == nil then
                         setmetatable(row, __m)
                     end
                 end

@@ -125,9 +125,9 @@ function NetworkService:connectLoginServer()
 	self.connectCB = handler(self,self.connectSuccessLogin)
 	self:connect()
 
-  local currProto = sprotoloader.load(Sproto.LOGIN_PROTO)
-  self.host = currProto:host "package"
-  self.request = self.host:attach(sproto)
+	local sp = sprotoloader.load(Sproto.LOGIN_PROTO)
+	self.host = sp:host "package"
+	self.request = self.host:attach(sp)
 end
 
 function NetworkService:connectSuccessLogin()

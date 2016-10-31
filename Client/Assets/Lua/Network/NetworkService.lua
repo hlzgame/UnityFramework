@@ -4,7 +4,7 @@ local sprotoparser = require "Network.sprotoparser"
 local sprotoloader = require "Network.sprotoloader"
 local sproto = require "Network.sproto"
 local crypt = require "crypt"
-
+local Sproto = require "main_proto"
 NetworkService = class("NetworkService")
 
 function NetworkService:ctor()
@@ -19,13 +19,6 @@ function NetworkService:ctor()
     mtEventCentre():addEventListener(SocketTCP.EVENT_CONNECT_FAILURE, handler(self,self.onConnectFailure) );
     mtEventCentre():addEventListener(SocketTCP.EVENT_DATA, handler(self,self.onReceiveMessage) );
     mtEventCentre():addEventListener(SocketTCP.EVENT_CLOSE_REASON, handler(self,self.onNetworkError));
-
-    self.loginProto = require "common.proto.login_proto"
-    sprotoloader.save(self.loginProto.c2s, 1)
-    sprotoloader.save(self.loginProto.s2c, 2)
-    self.gameProto = require "common.proto.game_proto"
-    sprotoloader.save(self.gameProto.c2s, 3)
-    sprotoloader.save(self.gameProto.s2c, 4)
 
     self.host = nil
     self.sessionCB = {}
@@ -132,9 +125,9 @@ function NetworkService:connectLoginServer()
 	self.connectCB = handler(self,self.connectSuccessLogin)
 	self:connect()
 
-  local currProto = sprotoloader.load(1)
+  local currProto = sprotoloader.load(Sproto.LOGIN_PROTO)
   self.host = currProto:host "package"
-  self.request = self.host:attach(sproto.new(self.loginProto.c2s))
+  self.request = self.host:attach(sproto)
 end
 
 function NetworkService:connectSuccessLogin()

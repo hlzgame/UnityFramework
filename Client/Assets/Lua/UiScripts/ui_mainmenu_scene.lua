@@ -3,7 +3,7 @@
 -- 此文件由[BabeLua]插件自动生成
 local class = require("Utils/middleclass")
 
-local person_pb = require("protol/person_pb")
+--local person_pb = require("protol/person_pb")
 local ui_messagebox = require("UiScripts/ui_messagebox")
 local ui_teammanage_scene = require("UiScripts/ui_teammanage_scene")
 
@@ -50,62 +50,62 @@ function ui_mainmenu_scene:on_post_load()
 
     local btn1 = self.transform:Find("btn1").gameObject
 
-    self.lua_behaviour:AddClick(btn1, function(go)
-        --        ui_messagebox.show( {
-        --            content_str = "你好，范特西",
-        --            btn_num = 1,
-        --            center_btn_str = string_table.get_text("okTxt"),
-        --            center_btn_handler = function()
-        --                print("hello world.")
-        --            end
-        --        } )
-        ui_messagebox.show( {
-            content_str = "你好，范特西",
-            btn_num = 2,
-            left_btn_str = string_table.get_text("okTxt"),
-            left_btn_handler = function()
-                local msg = person_pb.Person()
-                msg.id = 1024
-                msg.name = 'foo'
-                msg.email = 'bar'
+    -- self.lua_behaviour:AddClick(btn1, function(go)
+    --     --        ui_messagebox.show( {
+    --     --            content_str = "你好，范特西",
+    --     --            btn_num = 1,
+    --     --            center_btn_str = string_table.get_text("okTxt"),
+    --     --            center_btn_handler = function()
+    --     --                print("hello world.")
+    --     --            end
+    --     --        } )
+    --     ui_messagebox.show( {
+    --         content_str = "你好，范特西",
+    --         btn_num = 2,
+    --         left_btn_str = string_table.get_text("okTxt"),
+    --         left_btn_handler = function()
+    --             local msg = person_pb.Person()
+    --             msg.id = 1024
+    --             msg.name = 'foo'
+    --             msg.email = 'bar'
 
-                --                local tmp_phtone = msg.Extensions[person_pb.Phone.phones]:add()
+    --             --                local tmp_phtone = msg.Extensions[person_pb.Phone.phones]:add()
 
-                --                tmp_phtone.num = "12306"
-                --                tmp_phtone.type = person_pb.Phone.HOME
-                local tmp_phtone = msg.phones:add()
-                tmp_phtone.num = "12306"
-                tmp_phtone.type = person_pb.Phone.HOME
+    --             --                tmp_phtone.num = "12306"
+    --             --                tmp_phtone.type = person_pb.Phone.HOME
+    --             local tmp_phtone = msg.phones:add()
+    --             tmp_phtone.num = "12306"
+    --             tmp_phtone.type = person_pb.Phone.HOME
 
-                tmp_phtone = msg.phones:add()
-                tmp_phtone.num = "12308"
-                tmp_phtone.type = person_pb.Phone.MOBILE
+    --             tmp_phtone = msg.phones:add()
+    --             tmp_phtone.num = "12308"
+    --             tmp_phtone.type = person_pb.Phone.MOBILE
 
-                self.pb_data = msg:SerializeToString()
-                print(self.pb_data)
+    --             self.pb_data = msg:SerializeToString()
+    --             print(self.pb_data)
 
-                local buffer = ByteBuffer.New()
-                buffer:WriteBuffer(self.pb_data)
+    --             local buffer = ByteBuffer.New()
+    --             buffer:WriteBuffer(self.pb_data)
 
-                UNetworkManager:SendMessage(buffer)
+    --             UNetworkManager:SendMessage(buffer)
 
-                if self._cd_timer then
-                    self._cd_timer:Stop()
-                end
-            end,
-            right_btn_str = string_table.get_text("noTxt"),
-            right_btn_handler = function()
-                local msg = person_pb.Person()
-                msg:ParseFromString(self.pb_data)
-                print('person_pb decoder: ' .. tostring(msg.phones[2].num))
-                for _, v in ipairs(msg.phones) do
-                    print(v.num)
-                    print(v.type)
-                end
+    --             if self._cd_timer then
+    --                 self._cd_timer:Stop()
+    --             end
+    --         end,
+    --         right_btn_str = string_table.get_text("noTxt"),
+    --         right_btn_handler = function()
+    --             local msg = person_pb.Person()
+    --             msg:ParseFromString(self.pb_data)
+    --             print('person_pb decoder: ' .. tostring(msg.phones[2].num))
+    --             for _, v in ipairs(msg.phones) do
+    --                 print(v.num)
+    --                 print(v.type)
+    --             end
 
-            end
-        } )
-    end )
+    --         end
+    --     } )
+    -- end )
 
     local btn2 = self.transform:Find("btn2").gameObject
     local right_btn_sp = btn2:GetComponent(typeof(UImage))
